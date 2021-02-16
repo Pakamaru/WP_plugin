@@ -32,12 +32,12 @@ class RtmPlugin
 
 	}
 
-	function uninstall(){
-
-	}
-
 	function custom_post_type(){
 		register_post_type('book', ['label' => 'Books', 'public' => true, 'show_in_menu' => true]);
+	}
+
+	function enqueue(){
+
 	}
 
 
@@ -54,3 +54,4 @@ register_activation_hook( __FILE__, array($rtmPlugin, 'activate'));
 register_deactivation_hook( __FILE__, array($rtmPlugin, 'deactivate'));
 
 // uninstall
+// found in rtm-plugin\uninstall.php
