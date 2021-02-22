@@ -17,41 +17,30 @@ if ( ! defined( 'ABSPATH') ){
 	die;
 }
 
-class RtmPlugin
-{
-	public function __construct() {
-		add_action('init', array($this, 'custom_post_type'));
-	}
-
-	function activate(){
-		$this->custom_post_type();
-		flush_rewrite_rules();
-	}
-
-	function deactivate(){
-
-	}
-
-	function custom_post_type(){
-		register_post_type('book', ['label' => 'Books', 'public' => true, 'show_in_menu' => true]);
-	}
-
-	function enqueue(){
-
-	}
-
-
+if( file_exists( dirname(__FILE__) . '/vendor/autoload.php')){
+	require_once dirname(__FILE__) . '/vendor/autoload.php';
 }
 
-if(class_exists('RtmPlugin')){
-	$rtmPlugin = new RtmPlugin();
+function activate_rtm_plugin(){
+	Inc\Base\Activate::activate();
 }
 
-// activation
-register_activation_hook( __FILE__, array($rtmPlugin, 'activate'));
+function deactivate_rtm_plugin(){
+	Inc\Base\Deactivate::deactivate();
+}
 
-// deactivation
-register_deactivation_hook( __FILE__, array($rtmPlugin, 'deactivate'));
+register_activation_hook( __FILE__, 'activate_rtm_plugin');
+register_deactivation_hook(__FILE__, 'deactivate_rtm_plugin');
 
-// uninstall
-// found in rtm-plugin\uninstall.php
+if ( class_exists('Inc\Init')){
+	Inc\Init::register_services();
+}
+
+
+//		protected function create_post_type(){
+//			add_action('init', [$this, 'custom_post_type']);
+//		}
+//
+//		function custom_post_type(){
+//			register_post_type('book', ['label' => 'Books', 'public' => true, 'show_in_menu' => true]);
+//		}

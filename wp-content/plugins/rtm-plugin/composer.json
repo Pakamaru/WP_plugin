@@ -1,0 +1,19 @@
+{
+    "name": "amaru/rtm-plugin",
+    "description": "First WordPress plugin by amaru. Just for testing purposes.",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Amaru",
+            "email": "sanamaru99@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Inc\\": "./include"
+        }
+    }
+}
